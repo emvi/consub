@@ -32,7 +32,13 @@ func main() {
 	substitute := make(map[string]string)
 
 	for scanner.Scan() {
-		key, value, found := strings.Cut(scanner.Text(), "=")
+		line := strings.TrimSpace(scanner.Text())
+
+		if line == "" {
+			continue
+		}
+
+		key, value, found := strings.Cut(line, "=")
 
 		if found {
 			substitute[key] = value
